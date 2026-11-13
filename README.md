@@ -25,7 +25,7 @@ Générer `AUTH_SECRET` avec `openssl rand -base64 32`. Le mot de passe administ
 1. Configurer dans Vercel les variables `SUPABASE_URL`, `SUPABASE_SECRET_KEY`, `AUTH_SECRET`, `AUTH_TRUST_HOST=true`, `AUTH_URL`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` et `SEED_DEMO=false`.
 2. Lancer `npm run db:migrate` depuis un poste où le Supabase CLI est connecté au projet, avant le premier déploiement et après chaque nouvelle migration.
 3. Déployer l’application sur Vercel. Vercel compile Next.js ; les migrations sont gérées séparément par le CLI Supabase.
-4. Initialiser l’administrateur une fois depuis l’environnement configuré : `npm run db:seed`. Supprimer ensuite `ADMIN_PASSWORD` des environnements Vercel si elle n’est plus nécessaire.
+4. Le build Production crée le compte administrateur depuis `ADMIN_EMAIL` et `ADMIN_PASSWORD` après application du schéma. Le seed ne remplace jamais le mot de passe d’un compte existant. Pour une première initialisation manuelle : `npm run db:seed`.
 5. Configurer `RESEND_API_KEY` et `MAIL_FROM` pour les emails. Sans Resend, les demandes sont conservées et les notifications restent relançables dans l’administration.
 
 Pour les Preview, créer un projet Supabase de test séparé. Ne jamais pointer les builds Preview vers la base Production.

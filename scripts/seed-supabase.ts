@@ -5,8 +5,8 @@ import { loadEnvConfig } from "@next/env";
 loadEnvConfig(process.cwd());
 
 async function main() {
-  const email = process.env.ADMIN_EMAIL?.toLowerCase();
-  const password = process.env.ADMIN_PASSWORD;
+  const email = (process.env.ADMIN_EMAIL ?? process.env.admin_email)?.trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD ?? process.env.admin_password;
   if (!email || !password || password.length < 14) throw new Error("ADMIN_EMAIL et ADMIN_PASSWORD (14 caractères minimum) requis.");
 
   const url = process.env.SUPABASE_URL;
@@ -18,6 +18,7 @@ async function main() {
     { onConflict: "email", ignoreDuplicates: true },
   );
   if (admin.error) throw admin.error;
+  console.log("Compte administrateur initialisé (un compte existant n’a pas été modifié).");
 
   if (process.env.SEED_DEMO === "true") {
     const professional = await supabase.from("Professional").upsert({
