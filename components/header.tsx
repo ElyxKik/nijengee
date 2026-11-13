@@ -1,0 +1,5 @@
+import Link from "next/link";
+import {BrandMark} from "./brand-mark";
+import {BrandIcon} from "./brand-icon";
+export function Header(){return <header className="glass-header"><Link className="logo" href="/" aria-label="Nijengee, accueil"><span className="logo-symbol"><BrandMark/></span>nijengee<span>.</span></Link><nav aria-label="Navigation principale"><Link href="/">Accueil</Link><Link href="/#fonctionnement">Comment ça marche</Link><Link href="/#services">Nos services</Link><Link className="button" href="/demande">Trouver un professionnel <BrandIcon name="arrow" width={15} height={15}/></Link></nav></header>}
+export function Footer(){return <footer><div><Link className="logo" href="/"><span className="logo-symbol"><BrandMark/></span>nijengee<span>.</span></Link><p>Votre projet, les bons experts.</p><p>Kinshasa, République démocratique du Congo</p></div><div><Link href="/demande">Parlons de votre projet</Link><Link href="/confidentialite">Confidentialité</Link><Link href="/conditions">Conditions d’utilisation</Link><Link href="/admin">Espace administrateur</Link></div><small>© {new Date().getFullYear()} Nijengee</small></footer>}

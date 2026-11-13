@@ -1,0 +1,4 @@
+import {signIn} from "@/auth";
+import {AuthError} from "next-auth";
+import {redirect} from "next/navigation";
+export default async function Login({searchParams}:{searchParams:Promise<{error?:string}>}){const {error}=await searchParams;return <div className="panel"><span className="eyebrow">ESPACE ADMINISTRATEUR</span><h1>Heureux de vous retrouver.</h1><form action={async(f)=>{"use server";try{await signIn("credentials",{email:f.get("email"),password:f.get("password"),redirectTo:"/admin"});}catch(e){if(e instanceof AuthError)redirect("/connexion?error=1");throw e;}}}><label>Email<input name="email" type="email" autoComplete="username" required/></label><label>Mot de passe<input name="password" type="password" autoComplete="current-password" required/></label>{error&&<p className="error" role="alert">Connexion impossible. Vérifiez vos identifiants ou réessayez plus tard.</p>}<button className="button">Se connecter</button></form></div>}

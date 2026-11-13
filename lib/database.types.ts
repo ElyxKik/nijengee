@@ -1,0 +1,5 @@
+export type RequestStatus = "NEW" | "CONTACTED" | "IN_PROGRESS" | "CLOSED" | "CANCELLED";
+export type AdminUser = { id: string; email: string; passwordHash: string; active: boolean; createdAt: string; updatedAt: string };
+export type Professional = { id: string; name: string; specialty: string; phone: string; email: string | null; city: string; zones: string; qualifications: string; verified: boolean; available: boolean; notes: string; createdAt: string; updatedAt: string };
+export type ProjectRequest = { id: string; reference: string; submissionKey: string; professionalType: string; workType: string; buildingType: string; city: string; district: string; budget: string; name: string; phone: string; description: string; consentAt: string; status: RequestStatus; professionalId: string | null; notificationSentAt: string | null; createdAt: string; updatedAt: string };
+export type RequestActivity = { id: string; requestId: string; adminId: string | null; message: string; createdAt: string; updatedAt: string };

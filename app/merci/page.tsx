@@ -1,0 +1,3 @@
+import {cookies} from "next/headers";
+import Link from "next/link";
+export default async function Merci(){const reference=(await cookies()).get("nijengee-reference")?.value;return <div className="panel"><span className="eyebrow">LA PREMIÈRE ÉTAPE EST FRANCHIE</span><h1>{reference?"Merci ! Votre demande a bien été reçue.":"Construisons votre projet."}</h1><p>{reference?"Notre équipe examinera votre projet et vous contactera prochainement.":"Décrivez votre besoin pour commencer votre mise en relation."}</p>{reference&&<><p>Votre référence de demande</p><p className="reference">{reference}</p></>}<Link className="button" href={reference?"/":"/demande"}>{reference?"Retour à l’accueil":"Décrire mon projet"}</Link></div>}

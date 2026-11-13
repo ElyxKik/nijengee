@@ -1,0 +1,10 @@
+import {z} from "zod";
+import {isKinshasa,isKinshasaCommune} from "./locations";
+export const professionalTypes=["Architecte","Ingénieur en génie civil","Entreprise de construction","Conseils et études techniques"] as const;
+export const workTypes=["Construction neuve","Rénovation","Extension","Conception de plans","Étude technique","Autre"] as const;
+export const buildingTypes=["Maison individuelle","Immeuble résidentiel","Bâtiment commercial","Bureaux","Autre"] as const;
+export const budgets=["Moins de 20 000 $","20 000 à 50 000 $","50 000 à 100 000 $","Plus de 100 000 $","Budget non défini"] as const;
+export const phoneSchema=z.string().trim().regex(/^\+?[0-9 ()-]{9,20}$/, "Numéro de téléphone invalide").refine(value=>{const digits=value.replace(/\D/g,"");return digits.length>=9&&digits.length<=15;}, "Le numéro doit contenir entre 9 et 15 chiffres");
+export const requestSchema=z.object({professionalType:z.enum(professionalTypes),workType:z.enum(workTypes),buildingType:z.enum(buildingTypes),city:z.string().trim().min(2).max(80),district:z.string().trim().min(2).max(100),budget:z.enum(budgets),name:z.string().trim().min(3).max(120),phone:phoneSchema,description:z.string().max(3000),consent:z.literal(true),website:z.string().max(0),submissionKey:z.uuid()}).superRefine((data,ctx)=>{if(isKinshasa(data.city)&&!isKinshasaCommune(data.district))ctx.addIssue({code:"custom",path:["district"],message:"Sélectionnez une commune de Kinshasa."});});
+export const statuses={NEW:"Nouveau",CONTACTED:"Contacté",IN_PROGRESS:"En cours",CLOSED:"Clôturé",CANCELLED:"Annulé"};
+export const professionalSchema=z.object({name:z.string().trim().min(3).max(160),specialty:z.enum(professionalTypes),phone:phoneSchema,email:z.union([z.email(),z.literal("")]),city:z.string().min(2).max(80),zones:z.string().max(500),qualifications:z.string().max(3000),notes:z.string().max(3000),verified:z.boolean(),available:z.boolean()});
