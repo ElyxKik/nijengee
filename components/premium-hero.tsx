@@ -3,7 +3,7 @@ import {BrandIcon} from "./brand-icon";
 import {BrandMark} from "./brand-mark";
 import styles from "./premium-hero.module.css";
 export function PremiumHero(){return <section className={styles.hero} aria-labelledby="hero-title">
- <img src="/images/nijengee-architecture.jpg" alt="" fetchPriority="high" className={styles.photo}/>
+ <img src="/images/nijengee-architecture.webp" srcSet="/images/nijengee-architecture-900.webp 900w, /images/nijengee-architecture.webp 1800w" sizes="100vw" alt="" fetchPriority="high" decoding="async" className={styles.photo}/>
  <div className={styles.shade}/>
  <div className={styles.topline}><span className={styles.location}><span/> Kinshasa, RDC</span><BrandMark variant="white" width={28} height={25}/></div>
  <div className={styles.copy}><span className={styles.signature}>Votre projet, les bons experts.</span>

@@ -25,7 +25,7 @@ export default function Demande(){
  return <fieldset className="visual-fieldset"><legend>{title}<span>Un seul choix</span></legend><div className={"choice-grid "+(key==="professionalType"?"experts":"")}>{options.map((option,i)=><motion.label key={option} className={"choice-card "+(key==="budget"?"budget-card ":"illustrated-card ")+(data[key]===option?"selected":"")} whileHover={reduced?undefined:{y:-4}} whileTap={reduced?undefined:{scale:.98}} transition={{duration:.2}}>
  <input type="radio" disabled={!ready||pending} name={key} value={option} checked={data[key]===option} onChange={()=>set(key,option)} required/>
  <span className="choice-tick" aria-hidden="true">{data[key]===option&&<Check size={13}/>}</span>
- {key!=="budget"&&<img src={"/illustrations/choice-"+(offset+i)+".png"} alt="" width={240} height={160}/>}
+ {key!=="budget"&&<img src={"/illustrations/choice-"+(offset+i)+".webp"} alt="" width={240} height={160} loading="lazy" decoding="async"/>}
  <span className="choice-copy"><strong>{option}</strong><span className="choice-description">{descriptions[group][i]}</span></span>
  </motion.label>)}</div></fieldset>;
  }
